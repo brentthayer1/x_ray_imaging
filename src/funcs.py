@@ -1,9 +1,4 @@
-'''Trains a simple convnet on the MNIST dataset.
-based on a keras example by fchollet
-Find a way to improve the test accuracy to almost 99%!
-FYI, the number of layers and what they do is fine.
-But their parameters and other hyperparameters could use some work.
-'''
+
 from tensorflow import keras
 from tensorflow.keras.models import Sequential
 from tensorflow.keras.layers import Dense, Dropout, Activation, Flatten
@@ -13,7 +8,7 @@ from tensorflow.keras.utils import to_categorical
 
 import matplotlib.pyplot as plt
 import numpy as np
-np.random.seed(1337)  # for reproducibility
+np.random.seed(42)
 
 
 def load_and_featurize_data():
@@ -87,16 +82,16 @@ def define_model(nb_filters, kernel_size, input_shape, pool_size):
 
 if __name__ == '__main__':
     # important inputs to the model: don't changes the ones marked KEEP
-    batch_size = 30  # number of training samples used at a time to update the weights
-    nb_classes = 10    # number of output possibilities: [0 - 9] KEEP
-    nb_epoch = 5       # number of passes through the entire train dataset before weights "final"
-    img_rows, img_cols = 28, 28   # the size of the MNIST images KEEP
-    input_shape = (img_rows, img_cols, 1)   # 1 channel image input (grayscale) KEEP
-    nb_filters = 20    # number of convolutional filters to use
-    pool_size = (2, 2)  # pooling decreases image size, reduces computation, adds translational invariance
-    kernel_size = (4, 4)  # convolutional kernel size, slides over image to learn features
+    # batch_size = 30  # number of training samples used at a time to update the weights
+    # nb_classes = 10    # number of output possibilities: [0 - 9] KEEP
+    # nb_epoch = 5       # number of passes through the entire train dataset before weights "final"
+    # img_rows, img_cols = 28, 28   # the size of the MNIST images KEEP
+    # input_shape = (img_rows, img_cols, 1)   # 1 channel image input (grayscale) KEEP
+    # nb_filters = 20    # number of convolutional filters to use
+    # pool_size = (2, 2)  # pooling decreases image size, reduces computation, adds translational invariance
+    # kernel_size = (4, 4)  # convolutional kernel size, slides over image to learn features
 
-    X_train, X_test, Y_train, Y_test = load_and_featurize_data()
+    # X_train, X_test, Y_train, Y_test = load_and_featurize_data()
 
     # model = define_model(nb_filters, kernel_size, input_shape, pool_size)
 
@@ -108,5 +103,5 @@ if __name__ == '__main__':
     # print('Test score:', score[0])
     # print('Test accuracy:', score[1])  # this is the one we care about
 
-
+    print('Hello')
  
