@@ -235,8 +235,6 @@ test_generator = test_datagen.flow_from_directory(
 log_dir = "logs/fit/" + datetime.datetime.now().strftime("%Y%m%d-%H%M%S")
 tensorboard_callback = tf.keras.callbacks.TensorBoard(log_dir=log_dir, histogram_freq=1)
 
-# WEIGHTS
-
 # FIT
 model.fit_generator(
     train_generator,
