@@ -1,3 +1,5 @@
+![title_image](x_ray_imaging/images/title_image.png)
+
 # X-Ray Imaging 
 
 ## Topic
