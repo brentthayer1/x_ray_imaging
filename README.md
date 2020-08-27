@@ -1,4 +1,4 @@
-![title_image](x_ray_imaging/images/title_image.png)
+![title_image](/Volumes/b/Galvanize/DS-RFT4/capstones-RFT4/x_ray_imaging/images/title_image.png)
 
 # X-Ray Imaging 
 
