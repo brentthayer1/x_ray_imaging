@@ -16,7 +16,6 @@ downloaded.GetContentFile('pneumonia.zip')
 !unzip pneumonia.zip
 # !unzip pneum_normal_copy.zip
 
-
 import tensorflow as tf
 from tensorflow.keras.callbacks import TensorBoard
 from keras.preprocessing.image import ImageDataGenerator
@@ -30,145 +29,134 @@ from time import time
 from tensorboardcolab import TensorBoardColab, TensorBoardColabCallback
 from keras.optimizers import Adam, RMSprop
 
-
 # train_data_dir = '/content/pneum_normal_copy/train'
 # test_data_dir = '/content/pneum_normal_copy/test'
-
 train_data_dir = '/content/chest_xray/train'
-test_data_dir = '/content/chest_xray/val'
 val_data_dir = '/content/chest_xray/test'
+test_data_dir_norm = '/content/chest_xray/val/NORMAL'
+test_data_dir_pneum = '/content/chest_xray/val/PNEUMONIA'
 
 
 
-
-
-
-nb_classes = 1
-class_weights = {0 : 1.1,
-                1 : 1.00}
+#-------------------------------------------------------------------
 seed = 42
-
+nb_classes = 1
+class_weights = {0 : 1.20,
+                1 : 1.00}
 # validation_split = 0.2
 img_rows, img_cols = 300, 300
-
 batch_size = 32
 nb_epoch = 40     
-
-# CONV2D 1
+#-------------------------------------------------------------------
+                            # CONV2D 1
 nb_filters_1 = 32
 kernel_size_1 = (3, 3)
 stride_size_1 = (1, 1)
 pool_size_1 = (2, 2)
 activation_1 = 'swish'
-dropout_1 = 0.3
-
-# CONV2D 2
+#-------------------------------------------------------------------
+                            # CONV2D 2
 nb_filters_2 = 64
 kernel_size_2 = (3, 3)
 stride_size_2 = (1, 1)
 pool_size_2 = (2, 2)
 activation_2 = 'swish'
-dropout_2 = 0.9
-
-# CONV2D 3
+#-------------------------------------------------------------------
+                            # CONV2D 3
 nb_filters_3 =  64
 kernel_size_3 = (3, 3)
 stride_size_3 = (2, 2)
 pool_size_3 = (2, 2)
 activation_3 = 'swish'
-dropout_3 = 0.9
-
-# CONV2D 4
+#-------------------------------------------------------------------
+                            # CONV2D 4
 nb_filters_4 = 128
 kernel_size_4 = (3, 3)
 stride_size_4 = (2, 2)
 pool_size_4 = (2, 2)
 activation_4 = 'swish'
-dropout_4 = 0.9
-
-# CONV2D 5
+#-------------------------------------------------------------------
+                            # CONV2D 5
 nb_filters_5 = 128
 kernel_size_5 = (3, 3)
 stride_size_5 = (2, 2)
 pool_size_5 = (2, 2)
 activation_5 = 'swish'
-dropout_5 = 0.9
-
-# DENSE 6
+#-------------------------------------------------------------------
+                            # DENSE 6
 units_6 = 512
 activation_6 = 'swish'
 dropout_6 = 0.5
-
-# # DENSE 7
-# units_7 = 256
-# activation_7 = 'swish'
-# dropout_7 = 0.6
-
-# COMPILE
+#-------------------------------------------------------------------
+                            # DENSE 7
+units_7 = 256
+activation_7 = 'swish'
+dropout_7 = 0.5
+#-------------------------------------------------------------------
+                            # COMPILE
 compile_optimizer = Adam(lr=0.001)
-
-
-# CNN
+#-------------------------------------------------------------------
 if K.image_data_format() == 'channels_first':
     input_shape = (3, img_cols, img_rows)
     chanDim = 1
 else:
     input_shape = (img_cols, img_rows, 3)
     chanDim = -1
-
+#-------------------------------------------------------------------
+                              # CNN
 model = Sequential()
-
+#-------------------------------------------------------------------
+                            # CONV2D 1
 model.add(Conv2D(nb_filters_1,
                     (kernel_size_1[0], kernel_size_1[1]),
                     strides=(stride_size_1[0], stride_size_1[1]),
                     padding='same', activation=activation_1,
                     input_shape=input_shape))
 model.add(MaxPooling2D(pool_size=pool_size_1))
-# model.add(BatchNormalization(axis=chanDim))
-# model.add(Dropout(dropout_1)) 
-
+#-------------------------------------------------------------------
+                            # CONV2D 2
 model.add(Conv2D(nb_filters_2,
                     (kernel_size_2[0], kernel_size_2[1]),
                     strides=(stride_size_2[0], stride_size_2[1]),
                     padding='same', activation=activation_2))
 model.add(MaxPooling2D(pool_size=pool_size_2))
-# model.add(BatchNormalization(axis=chanDim))
-# model.add(Dropout(dropout_2)) 
-
+#-------------------------------------------------------------------
+                            # CONV2D 3
 model.add(Conv2D(nb_filters_3,
                     (kernel_size_3[0], kernel_size_3[1]),
                     strides=(stride_size_3[0], stride_size_3[1]),
                     padding='same', activation=activation_3))
 model.add(MaxPooling2D(pool_size=pool_size_3))
-# model.add(BatchNormalization(axis=chanDim))
-# model.add(Dropout(dropout_3)) 
-
+#-------------------------------------------------------------------
+                            # CONV2D 4
 model.add(Conv2D(nb_filters_4,
                     (kernel_size_4[0], kernel_size_4[1]),
                     strides=(stride_size_4[0], stride_size_4[1]),
                     padding='same', activation=activation_4))
 model.add(MaxPooling2D(pool_size=pool_size_4))
-# model.add(BatchNormalization(axis=chanDim))
-# model.add(Dropout(dropout_4))
-
+#-------------------------------------------------------------------
+                            # CONV2D 5
 model.add(Conv2D(nb_filters_5,
                     (kernel_size_5[0], kernel_size_5[1]),
                     strides=(stride_size_5[0], stride_size_5[1]),
                     padding='same', activation=activation_5))
 model.add(MaxPooling2D(pool_size=pool_size_5))
-# model.add(BatchNormalization(axis=chanDim))
-# # model.add(Dropout(dropout_5))
-
+#-------------------------------------------------------------------
+                            # FLATTEN
 model.add(Flatten())
-
+#-------------------------------------------------------------------
+                            # DENSE 6
 model.add(Dense(units_6, activation=activation_6))
 model.add(Dropout(dropout_6))
-
-# model.add(Dense(units_7, activation=activation_7))
-# model.add(Dropout(dropout_7))
-
+#-------------------------------------------------------------------
+                            # DENSE 7
+model.add(Dense(units_7, activation=activation_7))
+model.add(Dropout(dropout_7))
+#-------------------------------------------------------------------
+                            # DENSE 8
 model.add(Dense(nb_classes, activation='sigmoid'))
-
+#-------------------------------------------------------------------
+                            # METRICS
 METRICS = [ metrics.BinaryAccuracy(name='ACCURACY'),
             metrics.Precision(name='PRECISION'),
             metrics.Recall(name='RECALL'),
@@ -177,12 +165,13 @@ METRICS = [ metrics.BinaryAccuracy(name='ACCURACY'),
             metrics.TrueNegatives(name='TN'),
             metrics.FalsePositives(name='FP'),
             metrics.FalseNegatives(name='FN')]
-
+#-------------------------------------------------------------------
+                            # COMPILE
 model.compile(loss='binary_crossentropy',
                 optimizer=compile_optimizer,
                 metrics=METRICS)
-
-# GENERATORS
+#-------------------------------------------------------------------
+                        # DATA GENERATORS
 train_datagen = ImageDataGenerator(
     # rescale=1. / 255,
     shear_range=0.2,
@@ -190,16 +179,16 @@ train_datagen = ImageDataGenerator(
     horizontal_flip=True
     # validation_split=validation_split
     )
-
 val_datagen = ImageDataGenerator(
     # rescale=1. / 255,
     # shear_range=0.2,
     # zoom_range=0.2,
     # horizontal_flip=True
     )
-
-test_datagen = ImageDataGenerator()
-
+test_datagen_norm = ImageDataGenerator()
+test_datagen_pneum = ImageDataGenerator()
+#-------------------------------------------------------------------
+                          # GENERATORS
 train_generator = train_datagen.flow_from_directory(
     train_data_dir,
     target_size=(img_cols, img_rows),
@@ -208,9 +197,7 @@ train_generator = train_datagen.flow_from_directory(
     class_mode='binary',
     shuffle=True
     # subset='training',
-    # seed=seed
     )
-
 validation_generator = val_datagen.flow_from_directory(
     val_data_dir,
     target_size=(img_cols, img_rows),
@@ -219,22 +206,28 @@ validation_generator = val_datagen.flow_from_directory(
     class_mode='binary',
     shuffle=False
     # subset='validation',
-    # seed=seed
     )
-
-test_generator = test_datagen.flow_from_directory(
-    test_data_dir,
+test_generator_norm = test_datagen_norm.flow_from_directory(
+    test_data_dir_norm,
     target_size=(img_cols, img_rows),
     # color_mode='grayscale',
     batch_size=batch_size,
     shuffle=False,
     class_mode='binary'
-    # seed=seed
     )
-
+test_generator_pneum = test_datagen_pneum.flow_from_directory(
+    test_data_dir_pneum,
+    target_size=(img_cols, img_rows),
+    # color_mode='grayscale',
+    batch_size=batch_size,
+    shuffle=False,
+    class_mode='binary'
+    )
+#-------------------------------------------------------------------
+                          # SUMMARY
 model.summary()
-
-# FIT
+#-------------------------------------------------------------------
+                            # FIT
 history = model.fit(
     train_generator,
     steps_per_epoch= train_generator.samples // batch_size,
@@ -244,9 +237,10 @@ history = model.fit(
     class_weight=class_weights
     # callbacks=[tensorboard_callback]
     )
-
+#-------------------------------------------------------------------
 label_map = (train_generator.class_indices)
 print(label_map)
+#-------------------------------------------------------------------
 
 
 from sklearn.metrics import classification_report, roc_curve, auc, confusion_matrix, precision_score, recall_score, accuracy_score, roc_auc_score, plot_confusion_matrix
@@ -254,24 +248,19 @@ import numpy as np
 import matplotlib.pyplot as plt
 plt.style.use('fivethirtyeight')
 
-
 validation_generator.reset()
-y_pred = model.predict(validation_generator).ravel() #(test_gen, steps=len(df_val), verbose=1)
+y_pred = model.predict(validation_generator).ravel()
 fpr, tpr, thresholdss = roc_curve(validation_generator.classes, y_pred)
 auc_ = auc(fpr, tpr)
-
-
+#ROC---------------------------------------------
 fig, ax = plt.subplots(1,2, figsize=(10, 5))
-
-#roc
 ax[0].plot([0, 1], [0, 1], 'k--')
 ax[0].plot(fpr, tpr, label='area = {:.3f}'.format(auc_))
 ax[0].set_xlabel('False Positive Rate')
 ax[0].set_ylabel('True Positive Rate')
 ax[0].set_title('ROC')
 ax[0].legend(loc='best')
-
-# #auc
+#AUC---------------------------------------------
 ax[1].plot(history.history['AUC'])
 ax[1].plot(history.history['val_AUC'])
 ax[1].set_title('AUC')
@@ -284,57 +273,35 @@ plt.tight_layout()
 validation_generator.reset()
 Y_pred = model.predict(validation_generator)
 y_pred = np.argmax(Y_pred, axis=1)
-
-# cm = plot_confusion_matrix(classifier, X_test, y_test,
-#                                  display_labels=class_names,
-#                                  cmap=plt.cm.Blues,
-#                                  normalize=normalize)
-# cm.ax_.set_title('Confusion matrix')
-
+#CONFUSION MATRIX--------------------------------
 cm = confusion_matrix(validation_generator.classes, y_pred)
-plt.imshow(cm, cmap=plt.cm.Blues)
-
-plt.xticks([], [])
-plt.yticks([], [])
+plt.matshow(cm, cmap='Blues')
 plt.title('Confusion matrix')
 plt.colorbar()
 plt.show()
-
-print()
-print('Classification Report')
-target_names = validation_generator.classes
-class_labels = list(validation_generator.class_indices.keys())   
-report = classification_report(target_names, y_pred, target_names=class_labels)
-print()
-print(report)
-print()
-
+#ACCURACY---------------------------------------
 fig, ax = plt.subplots(2, 2, figsize=(12,6))
-#accuracy
 ax[0][0].plot(history.history['ACCURACY'])
 ax[0][0].plot(history.history['val_ACCURACY'])
 ax[0][0].set_title('Model Accuracy')
 ax[0][0].set_ylabel('Accuracy')
 ax[0][0].set_xlabel('Epoch')
 ax[0][0].legend(['train', 'val'], loc='best')
-
-#loss
+#LOSS-------------------------------------------
 ax[0][1].plot(history.history['loss'])
 ax[0][1].plot(history.history['val_loss'])
 ax[0][1].set_title('Model Loss')
 ax[0][1].set_ylabel('Loss')
 ax[0][1].set_xlabel('Epoch')
 ax[0][1].legend(['train', 'val'], loc='best')
-
-#precision
+#PRECISION--------------------------------------
 ax[1][0].plot(history.history['PRECISION'])
 ax[1][0].plot(history.history['val_PRECISION'])
 ax[1][0].set_title('Model Precision')
 ax[1][0].set_ylabel('Precision')
 ax[1][0].set_xlabel('Epoch')
 ax[1][0].legend(['train', 'val'], loc='best')
-
-#recall
+#RECALL----------------------------------------
 ax[1][1].plot(history.history['RECALL'])
 ax[1][1].plot(history.history['val_RECALL'])
 ax[1][1].set_title('Model Recall')
@@ -342,18 +309,20 @@ ax[1][1].set_ylabel('Recall')
 ax[1][1].set_xlabel('Epoch')
 ax[1][1].legend(['train', 'val'], loc='best')
 plt.tight_layout()
-;
 
 
+# NORMAL Predictions
+yhat_probs = model.predict(test_generator_norm)
+yhat_classes = (model.predict_classes(test_generator_norm) > 0.5).astype('int32')
+yhat_probs = yhat_probs[:, 0]
+yhat_classes = yhat_classes[:, 0]
+for prob, cl in zip(yhat_probs, yhat_classes):
+  print(f'{prob:0.3f} | {cl}')
 
-Y_pred = model.predict(test_generator)
-y_pred = np.argmax(Y_pred, axis=1)
-acc = accuracy_score(test_generator.classes, y_pred)
-prec = precision_score(test_generator.classes, y_pred)
-rec = recall_score(test_generator.classes, y_pred)
-auc = roc_auc_score(test_generator.classes, y_pred)
-
-print(f'Holdout Test Accuracy Score: {acc}')
-print(f'Holdout Test Precision Score: {prec}')
-print(f'Holdout Test Recall Score: {rec}')
-print(f'Holdout Test AUC Score: {auc}')
+# PNEUMONIA Predictions
+yhat_probs = model.predict(test_generator_pneum)
+yhat_classes = (model.predict_classes(test_generator_pneum) > 0.5).astype('int32')
+yhat_probs = yhat_probs[:, 0]
+yhat_classes = yhat_classes[:, 0]
+for prob, cl in zip(yhat_probs, yhat_classes):
+  print(f'{prob:0.3f} | {cl}')
