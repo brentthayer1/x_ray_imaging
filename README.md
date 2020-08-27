@@ -12,7 +12,9 @@ https://www.kaggle.com/paultimothymooney/chest-xray-pneumonia
 The dataset included images for a pneumonia class and a normal class.
 
 ### Pneumonia
-![](/images/xrays/pneum/person49_virus_101.jpeg){:height="100px" width="50px"}
+<img src="/images/xrays/pneum/person49_virus_101.jpeg" alt="pneumonia"
+	title="pneumonia" width="150" height="100" />
+    
 ### Normal
 ![](/images/xrays/norm/NORMAL2-IM-0198-0001.jpeg)
 
