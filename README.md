@@ -6,7 +6,7 @@
 ## Topic
 Pneumonia is an infection that inflames the air sacs in one or both lungs. The air sacs may fill with fluid or pus (purulent material), causing cough with phlegm or pus, fever, chills, and difficulty breathing. A variety of organisms, including bacteria, viruses and fungi, can cause pneumonia.
 
-Can a convolutional neural network determine if a chest x-ray shows signs of pneumonia?
+Can a convolutional neural network determine if a chest x-ray shows signs of pneumonia?  I hope to train a model that is about 90% accurate when predicting on if an x-ray shows signs of pneumonia.
 
 ## Data
 https://www.kaggle.com/paultimothymooney/chest-xray-pneumonia
@@ -76,5 +76,21 @@ When initially training a network to identify the two classes, the model was pre
 
 <img src="/images/plots/added_augmentation_60_epochs.png" alt="aug"
 	title="aug" width="440" height="220" /> 
+ 
+## Final Model
 
-The was a large range of image sizes in the data set.  I resized all of the images to the same size, and scaled the pixels.  The majority of the images had the lungs centered, but there were a handful that were not centered and had a very large black boundary.  Even though the majority of the images are grayscale, there were a few oddball colored X-rays.  I pushed the whole dataset to grayscale.  This was the extent of image preprocessing that took place. 
+<img src="/images/plots/ADD_MODEL_PATH.png" alt="architecture"
+	title="architecture" width="440" height="550" /> 
+
+|             | Test        |  Validation |
+| :---------: | :---------: | :----------:|
+| Loss        | 0.0000       | 0.0000     |
+| Accuracy    | 0.0000       | 0.0000     |
+| Precision   | 0.0000       | 0.0000     |
+| Recall      | 0.0000       | 0.0000     |
+| AUC         | 0.0000       | 0.0000     |
+| True Pos    | 0.0000       | 0.0000     |
+| True Neg    | 0.0000       | 0.0000     |
+| False Pos   | 0.0000       | 0.0000     |
+| False Neg   | 0.0000       | 0.0000     |
+
