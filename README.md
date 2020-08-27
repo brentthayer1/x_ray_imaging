@@ -1,5 +1,5 @@
 
-![titleimage](/Volumes/b/Galvanize/DS-RFT4/capstones-RFT4/x_ray_imaging/images/title_image.png)
+![titleimage](/x_ray_imaging/images/title_image.png)
 
 # X-Ray Imaging 
 
@@ -11,8 +11,8 @@ https://www.kaggle.com/paultimothymooney/chest-xray-pneumonia
 
 ## Process
 This dataset had a pretty substantial class imbalance.  
-![trainimbalance](/Volumes/b/Galvanize/DS-RFT4/capstones-RFT4/x_ray_imaging/images/training_images.png)
-![valimbalance](/Volumes/b/Galvanize/DS-RFT4/capstones-RFT4/x_ray_imaging/images/validation_images.png)
+![trainimbalance](/x_ray_imaging/images/training_images.png)
+![valimbalance](/x_ray_imaging/images/validation_images.png)
 
 
 When initially training a network to identify the two classes, the model was predicting pneumonia across the board.  
