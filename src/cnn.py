@@ -31,132 +31,132 @@ from keras.optimizers import Adam, RMSprop
 
 # train_data_dir = '/content/pneum_normal_copy/train'
 # test_data_dir = '/content/pneum_normal_copy/test'
+
 train_data_dir = '/content/chest_xray/train'
 val_data_dir = '/content/chest_xray/test'
-test_data_dir_norm = '/content/chest_xray/val/NORMAL'
-test_data_dir_pneum = '/content/chest_xray/val/PNEUMONIA'
+test_data_dir_norm = '/content/chest_xray/chest_xray/test/NORMAL'
+test_data_dir_pneum = '/content/chest_xray/chest_xray/test/PNEUMONIA'
 
-
-
-#-------------------------------------------------------------------
+#-----------------------------#  CNN  #------------------------------# 
 seed = 42
 nb_classes = 1
-class_weights = {0 : 1.20,
+class_weights = {0 : 1.10,
                 1 : 1.00}
 # validation_split = 0.2
 img_rows, img_cols = 300, 300
 batch_size = 32
-nb_epoch = 40     
-#-------------------------------------------------------------------
-                            # CONV2D 1
+nb_epoch = 100     
+
+#---------------------------#  CONV2D1 #-----------------------------#                       
 nb_filters_1 = 32
 kernel_size_1 = (3, 3)
 stride_size_1 = (1, 1)
 pool_size_1 = (2, 2)
 activation_1 = 'swish'
-#-------------------------------------------------------------------
-                            # CONV2D 2
+
+#---------------------------#  CONV2D2 #-----------------------------#
 nb_filters_2 = 64
 kernel_size_2 = (3, 3)
 stride_size_2 = (1, 1)
 pool_size_2 = (2, 2)
 activation_2 = 'swish'
-#-------------------------------------------------------------------
-                            # CONV2D 3
+
+#---------------------------#  CONV2D3 #-----------------------------#
 nb_filters_3 =  64
 kernel_size_3 = (3, 3)
 stride_size_3 = (2, 2)
 pool_size_3 = (2, 2)
 activation_3 = 'swish'
-#-------------------------------------------------------------------
-                            # CONV2D 4
+
+#---------------------------#  CONV2D4 #-----------------------------#
 nb_filters_4 = 128
 kernel_size_4 = (3, 3)
 stride_size_4 = (2, 2)
 pool_size_4 = (2, 2)
 activation_4 = 'swish'
-#-------------------------------------------------------------------
-                            # CONV2D 5
+
+#---------------------------#  CONV2D5 #-----------------------------#                         
 nb_filters_5 = 128
 kernel_size_5 = (3, 3)
 stride_size_5 = (2, 2)
 pool_size_5 = (2, 2)
 activation_5 = 'swish'
-#-------------------------------------------------------------------
-                            # DENSE 6
-units_6 = 512
+
+#---------------------------#  DENSE6  #-----------------------------#               
+units_6 = 256
 activation_6 = 'swish'
-dropout_6 = 0.5
-#-------------------------------------------------------------------
-                            # DENSE 7
+dropout_6 = 0.15
+
+#---------------------------#  DENSE7  #-----------------------------#            
 units_7 = 256
 activation_7 = 'swish'
 dropout_7 = 0.5
-#-------------------------------------------------------------------
-                            # COMPILE
+
+#---------------------------#  COMPILE  #----------------------------#                  
 compile_optimizer = Adam(lr=0.001)
-#-------------------------------------------------------------------
+
 if K.image_data_format() == 'channels_first':
     input_shape = (3, img_cols, img_rows)
     chanDim = 1
 else:
     input_shape = (img_cols, img_rows, 3)
     chanDim = -1
-#-------------------------------------------------------------------
-                              # CNN
+
+
+#----------------------------#  MODEL  #-----------------------------# 
 model = Sequential()
-#-------------------------------------------------------------------
-                            # CONV2D 1
+
+#---------------------------#  CONV2D1  #----------------------------# 
 model.add(Conv2D(nb_filters_1,
                     (kernel_size_1[0], kernel_size_1[1]),
                     strides=(stride_size_1[0], stride_size_1[1]),
                     padding='same', activation=activation_1,
                     input_shape=input_shape))
 model.add(MaxPooling2D(pool_size=pool_size_1))
-#-------------------------------------------------------------------
-                            # CONV2D 2
+
+#---------------------------#  CONV2D2  #----------------------------# 
 model.add(Conv2D(nb_filters_2,
                     (kernel_size_2[0], kernel_size_2[1]),
                     strides=(stride_size_2[0], stride_size_2[1]),
                     padding='same', activation=activation_2))
 model.add(MaxPooling2D(pool_size=pool_size_2))
-#-------------------------------------------------------------------
-                            # CONV2D 3
+
+#---------------------------#  CONV2D3  #----------------------------# 
 model.add(Conv2D(nb_filters_3,
                     (kernel_size_3[0], kernel_size_3[1]),
                     strides=(stride_size_3[0], stride_size_3[1]),
                     padding='same', activation=activation_3))
 model.add(MaxPooling2D(pool_size=pool_size_3))
-#-------------------------------------------------------------------
-                            # CONV2D 4
+
+#---------------------------#  CONV2D4  #----------------------------# 
 model.add(Conv2D(nb_filters_4,
                     (kernel_size_4[0], kernel_size_4[1]),
                     strides=(stride_size_4[0], stride_size_4[1]),
                     padding='same', activation=activation_4))
 model.add(MaxPooling2D(pool_size=pool_size_4))
-#-------------------------------------------------------------------
-                            # CONV2D 5
+
+#---------------------------#  CONV2D5  #----------------------------# 
 model.add(Conv2D(nb_filters_5,
                     (kernel_size_5[0], kernel_size_5[1]),
                     strides=(stride_size_5[0], stride_size_5[1]),
                     padding='same', activation=activation_5))
 model.add(MaxPooling2D(pool_size=pool_size_5))
-#-------------------------------------------------------------------
-                            # FLATTEN
+
+#---------------------------#  FLATTEN  #----------------------------# 
 model.add(Flatten())
-#-------------------------------------------------------------------
-                            # DENSE 6
-model.add(Dense(units_6, activation=activation_6))
-model.add(Dropout(dropout_6))
-#-------------------------------------------------------------------
-                            # DENSE 7
+
+#---------------------------#  DENSE6  #-----------------------------# 
+# model.add(Dense(units_6, activation=activation_6))
+# model.add(Dropout(dropout_6))
+
+#---------------------------#  DENSE7  #-----------------------------# 
 model.add(Dense(units_7, activation=activation_7))
 model.add(Dropout(dropout_7))
-#-------------------------------------------------------------------
-                            # DENSE 8
+
+#---------------------------#  DENSE8  #-----------------------------# 
 model.add(Dense(nb_classes, activation='sigmoid'))
-#-------------------------------------------------------------------
-                            # METRICS
+
+#--------------------------#  METRICS  #-----------------------------# 
 METRICS = [ metrics.BinaryAccuracy(name='ACCURACY'),
             metrics.Precision(name='PRECISION'),
             metrics.Recall(name='RECALL'),
@@ -165,13 +165,14 @@ METRICS = [ metrics.BinaryAccuracy(name='ACCURACY'),
             metrics.TrueNegatives(name='TN'),
             metrics.FalsePositives(name='FP'),
             metrics.FalseNegatives(name='FN')]
-#-------------------------------------------------------------------
-                            # COMPILE
+
+#--------------------------#  COMPILE  #-----------------------------# 
 model.compile(loss='binary_crossentropy',
                 optimizer=compile_optimizer,
                 metrics=METRICS)
-#-------------------------------------------------------------------
-                        # DATA GENERATORS
+
+
+#----------------------#  DATAGENERATORS  #--------------------------# 
 train_datagen = ImageDataGenerator(
     # rescale=1. / 255,
     shear_range=0.2,
@@ -187,8 +188,9 @@ val_datagen = ImageDataGenerator(
     )
 test_datagen_norm = ImageDataGenerator()
 test_datagen_pneum = ImageDataGenerator()
-#-------------------------------------------------------------------
-                          # GENERATORS
+
+
+#-------------------------#  GENERATORS  #---------------------------# 
 train_generator = train_datagen.flow_from_directory(
     train_data_dir,
     target_size=(img_cols, img_rows),
@@ -223,11 +225,15 @@ test_generator_pneum = test_datagen_pneum.flow_from_directory(
     shuffle=False,
     class_mode='binary'
     )
-#-------------------------------------------------------------------
-                          # SUMMARY
+
+
+#---------------------------#  SUMMARY  #-----------------------------# 
 model.summary()
-#-------------------------------------------------------------------
-                            # FIT
+
+
+
+#-----------------------------#  FIT  #-------------------------------# 
+
 history = model.fit(
     train_generator,
     steps_per_epoch= train_generator.samples // batch_size,
@@ -237,16 +243,16 @@ history = model.fit(
     class_weight=class_weights
     # callbacks=[tensorboard_callback]
     )
-#-------------------------------------------------------------------
+
 label_map = (train_generator.class_indices)
 print(label_map)
-#-------------------------------------------------------------------
-
+#--------------------------------------------------------------------#
 
 from sklearn.metrics import classification_report, roc_curve, auc, confusion_matrix, precision_score, recall_score, accuracy_score, roc_auc_score, plot_confusion_matrix
 import numpy as np
 import matplotlib.pyplot as plt
 plt.style.use('fivethirtyeight')
+
 
 validation_generator.reset()
 y_pred = model.predict(validation_generator).ravel()
@@ -269,16 +275,16 @@ ax[1].set_xlabel('Epoch')
 ax[1].legend(['train', 'val'], loc='best')
 plt.tight_layout()
 
-
+#CONFUSION MATRIX--------------------------------
 validation_generator.reset()
 Y_pred = model.predict(validation_generator)
 y_pred = np.argmax(Y_pred, axis=1)
-#CONFUSION MATRIX--------------------------------
 cm = confusion_matrix(validation_generator.classes, y_pred)
 plt.matshow(cm, cmap='Blues')
 plt.title('Confusion matrix')
 plt.colorbar()
 plt.show()
+
 #ACCURACY---------------------------------------
 fig, ax = plt.subplots(2, 2, figsize=(12,6))
 ax[0][0].plot(history.history['ACCURACY'])
@@ -309,15 +315,23 @@ ax[1][1].set_ylabel('Recall')
 ax[1][1].set_xlabel('Epoch')
 ax[1][1].legend(['train', 'val'], loc='best')
 plt.tight_layout()
+;
+
 
 
 # NORMAL Predictions
-yhat_probs = model.predict(test_generator_norm)
-yhat_classes = (model.predict_classes(test_generator_norm) > 0.5).astype('int32')
-yhat_probs = yhat_probs[:, 0]
-yhat_classes = yhat_classes[:, 0]
-for prob, cl in zip(yhat_probs, yhat_classes):
-  print(f'{prob:0.3f} | {cl}')
+test_generator_norm.classes
+# yhat_probs = model.predict(test_generator_norm)
+# yhat_classes
+
+# yhat_classes = (model.predict_classes(test_generator_norm) > 0.5).astype('int32')
+# yhat_probs = yhat_probs[:, 0]
+# yhat_classes = yhat_classes[:, 0]
+
+# for prob, cl in zip(yhat_probs, yhat_classes):
+#   print(f'{prob:0.3f} | {cl}')
+
+
 
 # PNEUMONIA Predictions
 yhat_probs = model.predict(test_generator_pneum)
