@@ -86,5 +86,8 @@ When initially training a network to identify the two classes, the model was pre
 | False Neg   | 0.0000       | 0.0000     |
 
 
+## Conclusion
+Though I can not personally differentiate between a chest X-ray showing pneumonia and one that does not, the network seemed to pick up on the difference fairly quickly.  I never reached an accuracy rating over 0.92, but this model seems to be very effective.
 
-[Slide Deck](https://github.com/brentthayer1/x_ray_imaging/tree/master/presentation)
+## Slide Deck
+[Please feel free to view my presentation slide deck with more charts and exciting things.](https://github.com/brentthayer1/x_ray_imaging/tree/master/presentation)
