@@ -70,23 +70,16 @@ When initially training a network to identify the two classes, the model was pre
  
 ## Final Model
 
-<img src="/images/plots/final_model_roc.png" alt="final_roc"
+<img src="/images/plots/FINAL_MODEL_2_ROC.png" alt="final_roc"
 	title="final_roc" width="440" height="220" /> 
 
-<img src="/images/plots/final_model.png" alt="final"
+<img src="/images/plots/FINAL_MODEL_2.png" alt="final"
 	title="final" width="440" height="220" /> 
 
-|             | Test         | Validation |
-| :---------: | :---------:  |:----------:|
-| Loss        | 0.0901       | 0.3014     |
-| Accuracy    | 0.9672       | 0.9030     |
-| Precision   | 0.9798       | 0.9049     |
-| Recall      | 0.9760       | 0.9412     |
-| AUC         | 0.9937       | 0.9558     |
-| True Pos    | 3782         | 352        |
-| True Neg    | 1263         | 197        |
-| False Pos   | 78           | 37         |
-| False Neg   | 93           | 22         |
+Accuracy: 0.9030   
+Precision: 0.8723   
+Recall: 0.9866 
+AUC: 0.9631
 
 
 ## Conclusion
