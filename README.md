@@ -21,15 +21,6 @@ The dataset included images for a pneumonia class and a normal class.
 <img src="/images/xrays/norm/NORMAL2-IM-0198-0001.jpeg" alt="normal"
 	title="normal" width="250" height="250" />
 
-After browsing through all of the images quickly, I noticed that the majority of them have an 'R' in the top left corner.  There would be no need for arranging images based on posterior or anterior shots.  I made the assumption that all of these images were anterior.
-In addition to this, I also noticed that the majority of these images were roughly the same size and the lungs were more or less centered in the frame.  There were a handful of exceptions, but I decided to see what the network would do with them.
-
-<img src="/images/xrays/oddball/person1706_bacteria_4516.jpeg" alt="oddball1"
-	title="oddball1" width="250" height="125" />
-
-<img src="/images/xrays/oddball/person1712_bacteria_4529.jpeg" alt="oddball2"
-	title="oddball2" width="250" height="250" />
-
 ## Process
 This dataset had a pretty substantial class imbalance.  
 
@@ -49,7 +40,7 @@ When initially training a network to identify the two classes, the model was pre
 <img src="/images/plots/fixed_roc.png" alt="fix_roc"
 	title="fix_roc" width="440" height="220" /> 
 
-## Mid Way
+## Swish Vs RelU
 
 ### Swish Activations On All Layers
 
@@ -94,3 +85,6 @@ When initially training a network to identify the two classes, the model was pre
 | False Pos   | 0.0000       | 0.0000     |
 | False Neg   | 0.0000       | 0.0000     |
 
+
+
+[Slide Deck](https://github.com/brentthayer1/x_ray_imaging/tree/master/presentation)
