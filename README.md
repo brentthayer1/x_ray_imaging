@@ -70,24 +70,27 @@ When initially training a network to identify the two classes, the model was pre
  
 ## Final Model
 
-<img src="/images/plots/ADD_MODEL_PATH.png" alt="architecture"
-	title="architecture" width="440" height="550" /> 
+<img src="/images/plots/final_model_roc.png" alt="final_roc"
+	title="final_roc" width="440" height="220" /> 
 
-|             | Test        |  Validation |
-| :---------: | :---------: | :----------:|
-| Loss        | 0.0000       | 0.0000     |
-| Accuracy    | 0.0000       | 0.0000     |
-| Precision   | 0.0000       | 0.0000     |
-| Recall      | 0.0000       | 0.0000     |
-| AUC         | 0.0000       | 0.0000     |
-| True Pos    | 0.0000       | 0.0000     |
-| True Neg    | 0.0000       | 0.0000     |
-| False Pos   | 0.0000       | 0.0000     |
-| False Neg   | 0.0000       | 0.0000     |
+<img src="/images/plots/final_model.png" alt="final"
+	title="final" width="440" height="220" /> 
+
+|             | Test         | Validation |
+| :---------: | :---------:  |:----------:|
+| Loss        | 0.0901       | 0.3014     |
+| Accuracy    | 0.9672       | 0.9030     |
+| Precision   | 0.9798       | 0.9049     |
+| Recall      | 0.9760       | 0.9412     |
+| AUC         | 0.9937       | 0.9558     |
+| True Pos    | 3782         | 352        |
+| True Neg    | 1263         | 197        |
+| False Pos   | 78           | 37         |
+| False Neg   | 93           | 22         |
 
 
 ## Conclusion
-Though I can not personally differentiate between a chest X-ray showing pneumonia and one that does not, the network seemed to pick up on the difference fairly quickly.  I never reached an accuracy rating over 0.92, but this model seems to be very effective.
+Though I can not personally differentiate between a chest X-ray showing pneumonia and one that does not, the network seemed to pick up on the difference fairly quickly.  I never reached an accuracy rating over 0.92, but this network seems to be very effective in correctly identifying pneumonia in an X-ray image.
 
 ## Slide Deck
 [Please feel free to view my presentation slide deck with more charts and exciting things.](https://github.com/brentthayer1/x_ray_imaging/tree/master/presentation)
