@@ -34,17 +34,11 @@ When initially training a network to identify the two classes, the model was pre
 
 ## Initial Model 
 
-<img src="/images/plots/swish_to_relu_roc.png" alt="relu_roc"
-	title="relu_roc" width="440" height="220" /> 
-
 <img src="/images/plots/swish_to_relu.png" alt="relu"
 	title="relu" width="440" height="220" /> 
 
 
 ### Second Model
-
-<img src="/images/plots/added_augmentation_60_epochs_roc.png" alt="aug_roc"
-	title="aug_roc" width="440" height="220" /> 
 
 <img src="/images/plots/added_augmentation_60_epochs.png" alt="aug"
 	title="aug" width="440" height="220" /> 
