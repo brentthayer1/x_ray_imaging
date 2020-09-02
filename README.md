@@ -32,25 +32,7 @@ This dataset had a pretty substantial class imbalance.
 
 When initially training a network to identify the two classes, the model was predicting pneumonia across the board.  
 
-## Initial Model Metrics
-
-<img src="/images/plots/fixed_roc_roc.png" alt="fix_roc_roc"
-	title="fix_roc_roc" width="440" height="220" /> 
-
-<img src="/images/plots/fixed_roc.png" alt="fix_roc"
-	title="fix_roc" width="440" height="220" /> 
-
-## Swish Vs RelU
-
-### Swish Activations On All Layers
-
-<img src="/images/plots/50_epochs_swish_roc.png" alt="swish_roc"
-	title="swish_roc" width="440" height="220" /> 
-
-<img src="/images/plots/50_epochs_swish.png" alt="swish"
-	title="swish" width="440" height="220" />
-
-### ReLU Activations On All Layers
+## Initial Model 
 
 <img src="/images/plots/swish_to_relu_roc.png" alt="relu_roc"
 	title="relu_roc" width="440" height="220" /> 
@@ -58,9 +40,8 @@ When initially training a network to identify the two classes, the model was pre
 <img src="/images/plots/swish_to_relu.png" alt="relu"
 	title="relu" width="440" height="220" /> 
 
-## Final Steps
 
-### Added Image Augmentation Back In
+### Second Model
 
 <img src="/images/plots/added_augmentation_60_epochs_roc.png" alt="aug_roc"
 	title="aug_roc" width="440" height="220" /> 
