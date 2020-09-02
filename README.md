@@ -45,11 +45,11 @@ When initially training a network to identify the two classes, the model was pre
  
 ## Final Model
 
-<img src="/images/plots/FINAL_MODEL_2_ROC.png" alt="final_roc"
-	title="final_roc" width="440" height="220" /> 
-
 <img src="/images/plots/FINAL_MODEL_2.png" alt="final"
 	title="final" width="440" height="220" /> 
+
+<img src="/images/plots/FINAL_MODEL_2_ROC.png" alt="final_roc"
+	title="final_roc" width="440" height="220" /> 
 
 Accuracy: 0.9030   
 Precision: 0.8723   
