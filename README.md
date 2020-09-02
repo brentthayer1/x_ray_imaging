@@ -25,31 +25,30 @@ The dataset included images for a pneumonia class and a normal class.
 This dataset had a pretty substantial class imbalance.  
 
 <img src="/images/plots/training_images.png" alt="dist1"
-	title="dist1" width="330" height="220" />
+	title="dist1" width="350" height="230" />
 
 <img src="/images/plots/validation_images.png" alt="dist2"
-	title="dist2" width="330" height="220" />  
+	title="dist2" width="350" height="230" />  
 
-When initially training a network to identify the two classes, the model was predicting pneumonia across the board.  
 
 ## Initial Model 
 
 <img src="/images/plots/swish_to_relu.png" alt="relu"
-	title="relu" width="440" height="220" /> 
+	title="relu" width="350" height="230" /> 
 
 
 ### Second Model
 
 <img src="/images/plots/added_augmentation_60_epochs.png" alt="aug"
-	title="aug" width="440" height="220" /> 
+	title="aug" width="350" height="230" /> 
  
 ## Final Model
 
 <img src="/images/plots/FINAL_MODEL_2.png" alt="final"
-	title="final" width="440" height="220" /> 
+	title="final" width="400" height="200" /> 
 
 <img src="/images/plots/FINAL_MODEL_2_ROC.png" alt="final_roc"
-	title="final_roc" width="440" height="220" /> 
+	title="final_roc" width="400" height="200" /> 
 
 Accuracy: 0.9030   
 Precision: 0.8723   
