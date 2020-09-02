@@ -60,6 +60,6 @@ AUC: 0.9631
 Though I can not personally differentiate between a chest X-ray showing pneumonia and one that does not, the network seemed to pick up on the difference fairly quickly.  I never reached an accuracy rating over 0.92, but this network seems to be very effective in correctly identifying pneumonia in an X-ray image.
 
 ## Slide Deck
-[Please feel free to view my presentation slide deck with more charts and exciting things.](https://github.com/brentthayer1/x_ray_imaging/tree/master/presentation)
+[Presentation Slid Deck](https://github.com/brentthayer1/x_ray_imaging/tree/master/presentation)
 
 [COVID/Pneumonia Classification CNN](https://github.com/brentthayer1/cov_pneum_classification)
